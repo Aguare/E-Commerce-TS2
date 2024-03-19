@@ -86,3 +86,57 @@ typings/
 
 # DynamoDB Local files
 .dynamodb/
+
+# Angular specific exclusions
+
+# Angular generated artifacts
+/dist/
+/e2e/*.log
+/e2e/*.png
+/e2e/*.xml
+
+# Angular config files
+/angular.json
+/tsconfig.json
+/tsconfig.app.json
+/tsconfig.spec.json
+
+# Angular dependency directory
+/node_modules/
+
+# Angular build output
+/*.js
+/*.js.map
+/*.css
+/*.css.map
+/assets/
+
+# Angular testing artifacts
+/*.d.ts
+
+# Angular linting
+/.eslintrc.json
+
+# Angular workspace settings
+/angular-cli.json
+
+# Angular project settings
+/.editorconfig
+
+# Angular Karma configuration
+/karma.conf.js
+
+# Angular Protractor configuration
+/protractor.conf.js
+
+# Angular linting and formatting settings
+/tslint.json
+
+# Angular local development server settings
+/.browserslistrc
+
+# Angular SSR temporary files
+/server/
+
+# Angular server-side rendering files
+/dist-server/
