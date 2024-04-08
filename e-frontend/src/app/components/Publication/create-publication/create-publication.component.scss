@@ -1,0 +1,21 @@
+.image-preview {
+  display: inline-block;
+  margin-right: 10px;
+  position: relative;
+}
+
+.btn-remove {
+  position: absolute;
+  bottom: 7px;
+  right: 7px;
+}
+
+.NgxEditor__Wrapper {
+  height: 300px;
+  overflow-y: auto;
+  ngx-editor-menu {
+    position: sticky;
+    top: 0;
+    z-index: 1000; 
+  }
+}

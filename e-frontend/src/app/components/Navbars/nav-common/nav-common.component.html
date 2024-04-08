@@ -1,0 +1,73 @@
+<nav class="navbar navbar-expand-lg border-bottom border-body" data-bs-theme="dark" style="background-color: #8f6c14;">
+    <div class="container-fluid justify-content-center"> <!-- Añade la clase justify-content-center -->
+        <a class="navbar-brand" href="#">
+            <img src="../../../../assets/img/logo.png" width="150" height="60">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
+            aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarColor01">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="/market/publications">Productos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Voluntariados</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa-solid fa-book"></i> Publicaciones
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <li><a class="dropdown-item" href="/publication/create">Crear</a></li>
+                        <li><a class="dropdown-item" href="#">Mis Publicaciones</a></li>
+                        <li><a class="dropdown-item" href="#">Mis Voluntariados</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa-solid fa-shop"></i> Compras
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <li><a class="dropdown-item" href="#">Mis Compras</a></li>
+                        <li><a class="dropdown-item" href="#">Mis Publicaciones</a></li>
+                        <li><a class="dropdown-item" href="#">Mis Voluntariados</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <div class="mx-0">
+                <button type="button" class="btn btn-warning position-relative mx-2">
+                    <i class="fa-solid fa-coins"></i>
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                        {{ this.user.coins || 0 }}
+                    </span>
+                </button>
+                <button type="button" class="btn btn-success position-relative mx-2">
+                    <i class="fa-solid fa-dollar-sign"></i>
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                        {{ this.user.money || 0 }}
+                    </span>
+                </button>
+            </div>
+
+            <div class="dropdown dropstart">
+                <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    <img [src]="this.profile" class="rounded mx-1" height="30px">
+                    {{ this.username || 'Mi Cuenta' }}
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li><a class="dropdown-item" href="#">Perfil</a></li>
+                    <li><a class="dropdown-item" href="#">Mensajes</a></li>
+                    <li><a class="dropdown-item" href="#">Configuración</a></li>
+                    <li><a class="dropdown-item" (click)="logout()">Salir</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+<router-outlet></router-outlet>

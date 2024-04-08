@@ -1,0 +1,136 @@
+<div class="modal fade" id="modalLogin" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="d-flex justify-content-end">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <ul class="nav nav-underline justify-content-center">
+                    <li class="nav-item">
+                        <a class="nav-link" [ngClass]="{active: isLoginMode}" (click)="isLoginMode = true">
+                            Iniciar Sesión
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" [ngClass]="{active: !isLoginMode}" (click)="isLoginMode = false">
+                            Registrarse
+                        </a>
+                    </li>
+                </ul>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    @if (isLoginMode) {
+                                    <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+                                        <div class="mb-3">
+                                            <label for="user" class="form-label">Usuario</label>
+                                            <input type="text" class="form-control" id="user"
+                                                formControlName="user">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="password" class="form-label">Contraseña</label>
+                                            <input type="password" class="form-control" id="password"
+                                                formControlName="password">
+                                        </div>
+                                        <div class="mb-3 form-check">
+                                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                            <label class="form-check-label" for="exampleCheck1">Recordarme</label>
+                                        </div>
+                                        <div class="mb-3">
+                                            <a href="#" class="text-decoration-none">¿Olvidaste tu contraseña?</a>
+                                        </div>
+                                        <div class="text-center">
+                                            <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+                                        </div>
+                                    </form>
+                                    } @else {
+                                    <form [formGroup]="signupForm" class="was-validated" (ngSubmit)="onSignup()">
+                                        <div class="mb-3">
+                                            <label for="dpi" class="form-label">DPI</label>
+                                            <input type="number" class="form-control" id="dpi" max="9999999999999"
+                                                min="1111111111111" formControlName="dpi" required>
+                                            @if (this.f['dpi'].errors) {
+                                            <div class="invalid-feedback">
+                                                @if (this.f['dpi'].errors['required']) {
+                                                <div>DPI es requerido</div>
+                                                } @if (this.f['dpi'].errors['min']) {
+                                                <div>DPI debe tener al menos 13 números</div>
+                                                } @if (this.f['dpi'].errors['max']) {
+                                                <div>DPI debe tener máximo 13 números</div>
+                                                }
+                                            </div>
+                                            }
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="names" class="form-label">Nombres</label>
+                                            <input type="text" class="form-control" id="names" maxlength="100"
+                                                minlength="4" formControlName="names" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="lastNames" class="form-label">Apellidos</label>
+                                            <input type="text" class="form-control" id="lastNames" maxlength="100"
+                                                minlength="4" formControlName="lastNames" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="usuario" class="form-label">Usuario</label>
+                                            <input type="text" class="form-control" id="usuario" maxlength="45"
+                                                minlength="4" formControlName="user" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="email" class="form-label">Correo Electrónico</label>
+                                            <input type="email" class="form-control" id="email" formControlName="email"
+                                                required>
+                                            @if (f['email'].errors) {
+                                            <div class="invalid-feedback">
+                                                @if (f['email'].errors['required']) {
+                                                <div>Email es requerido</div>
+                                                }
+                                                @if (f['email'].errors['email']) {
+                                                <div>Email es inválido</div>
+                                                }
+                                            </div>
+                                            }
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="password" class="form-label">Contraseña</label>
+                                            <input type="password" class="form-control" id="password" minlength="5"
+                                                formControlName="password" required>
+                                            @if (this.f['password'].errors) {
+                                            <div class="invalid-feedback">
+                                                @if (this.f['password'].errors['required']) {
+                                                <div>Contraseña es requerida</div>
+                                                }
+                                            </div>
+                                            }
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Confirmar Contraseña</label>
+                                            <input type="password" class="form-control" minlength="5"
+                                                formControlName="confirmPassword" required>
+                                            @if (this.f['confirmPassword'].errors) {
+                                            <div class="invalid-feedback">
+                                                @if (this.f['confirmPassword'].errors['required']) {
+                                                <div>Confirmar Contraseña es requerida</div>
+                                                }
+                                                @if (this.f['confirmPassword'].errors['notEqual']) {
+                                                <div>Las contraseñas no coinciden</div>
+                                                }
+                                            </div>
+                                            }
+                                        </div>
+                                        <div class="text-center">
+                                            <button type="submit" class="btn btn-primary">Registrarse</button>
+                                        </div>
+                                    </form>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

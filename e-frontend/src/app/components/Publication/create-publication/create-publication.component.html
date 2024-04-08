@@ -1,0 +1,64 @@
+<div class="container my-4">
+    <h3 class="text-center">Crear Publicación</h3>
+    <form (ngSubmit)="createPublication()" [formGroup]="form" class="row g-3 was-validated">
+        <div class="col-md-6">
+            <label for="inputName" class="form-label">Título</label>
+            <input type="text" formControlName="title" class="form-control" id="inputName" placeholder="Título"
+                minlength="5" maxlength="50" required>
+        </div>
+        <div class="col-md-6">
+            <label for="inputPrice" class="form-label">Precio</label>
+            <div class="input-group">
+                <span class="input-group-text">Q</span>
+                <input type="number" formControlName="price" class="form-control" id="inputPrice" placeholder="Precio"
+                    min="0.01" step="0.01" max="99999999" required>
+            </div>
+        </div>
+        <div class="col-12">
+            <label for="inputDescription" class="form-label">Descripción</label>
+            <div class="NgxEditor__Wrapper" style="min-height: 250px; overflow-y: auto;">
+                <ngx-editor-menu [editor]="editor"> </ngx-editor-menu>
+                <ngx-editor [editor]="editor" [ngModelOptions]="{standalone: true}" [(ngModel)]="productDescription"
+                    [disabled]="false" [placeholder]="'Escribe una descripción'"></ngx-editor>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <label for="inputCategory" class="form-label">Categorías</label>
+            <tag-input [(ngModel)]="tags" [addOnBlur]="true" [placeholder]="'Agregar Categoria'"
+                [secondaryPlaceholder]="'Agregar Categoria'" [ngModelOptions]="{standalone: true}"
+                [separatorKeyCodes]="[32]" placeholder="Agregar Categoria"></tag-input>
+        </div>
+        <div class="col-md-6">
+            @if (this.type === 1) {
+            <label for="inputStock" class="form-label">Cantidad</label>
+            }
+            @if (this.type === 2) {
+            <label for="inputStock" class="form-label">Cantidad de Personas</label>
+            }
+            <input type="number" formControlName="stock" class="form-control" id="inputStock" min="1" max="99999999"
+                required>
+        </div>
+        <div class="col-md-6">
+            <label for="inputType" class="form-label">Tipo</label>
+            <select formControlName="type" class="form-select" (change)="selectType($event)" id="inputType" required>
+                <option value="1">Bien o Servicio</option>
+                <option value="2">Voluntariado</option>
+            </select>
+        </div>
+        <div class="col-md-6">
+            <label for="inputImages" class="form-label">Imágenes</label>
+            <input type="file" formControlName="images" class="form-control" id="images"
+                (change)="onImagesSelect($event)" multiple required>
+        </div>
+        <div class="col-12 mt-3">
+            <div class="image-preview" *ngFor="let imageUrl of imagesPreviewUrls; let i = index">
+                <img [src]="imageUrl" class="img-thumbnail" style="max-height: 100px;">
+                <a type="button" class="btn btn-danger btn-sm btn-remove" (click)="removeImage(i)"><i
+                        class="fa-solid fa-trash-can"></i></a>
+            </div>
+        </div>
+        <div class="col-12 text-center">
+            <button type="submit" class="btn btn-lg btn-primary">Crear</button>
+        </div>
+    </form>
+</div>
