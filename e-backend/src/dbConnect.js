@@ -19,7 +19,6 @@ connection.getConnection((error) => {
     console.error('Error connecting to database: ', error);
     return;
   }
-
   console.log('Connection to database established');
 });
 

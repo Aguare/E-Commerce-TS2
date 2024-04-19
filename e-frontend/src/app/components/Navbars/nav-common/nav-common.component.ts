@@ -30,6 +30,9 @@ export class NavCommonComponent {
         this._localStorageService.saveUser(res.user);
         this.user = res.user;
         this.profile = this.user.profile;
+        if (this.user.profile === 'ADMIN') {
+          this._router.navigate(['/admin']);
+        }
       });
     }
   }
@@ -38,4 +41,28 @@ export class NavCommonComponent {
     this._localStorageService.removeUser();
     this._router.navigate(['/home']);
   }
+
+  formatNumber(value: number): string {
+    if ((value / 1000000000000) >= 1) {
+      return this.cvTD(value / 1000000000000) + 'T';
+    } else if ((value / 1000000000) >= 1) {
+      return this.cvTD(value / 1000000000) + 'B';
+    } else if ((value / 1000000) >= 1) {
+      return this.cvTD(value / 1000000) + 'M';
+    } else if ((value / 1000) >= 1) {
+      return this.cvTD(value / 1000) + 'K';
+    } else {
+      return value.toString();
+    }
+  }
+
+  cvTD(value: number): string {
+    let val = value.toString();
+    if (val.includes('.')) {
+      let decimal = val.split('.')[1];
+      val = val.split('.')[0] + '.' + decimal.substring(0, 2);
+    }
+    return val;
+  }
+
 }

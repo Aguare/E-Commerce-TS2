@@ -1,0 +1,39 @@
+<div class="container my-4">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="text-center">Agregar Fondos</h1>
+        </div>
+        <div class="col-6 mx-auto">
+            <form [formGroup]="registerForm" class="was-validated row g-3" (submit)="addFounds()">
+                <div class="col-12">
+                    <label for="amount" class="form-label">Monto</label>
+                    <input type="number" min="1" class="form-control" id="amount" name="amount" formControlName="amount"
+                        required>
+                </div>
+                <div class="col-12">
+                    <label for="card" class="form-label">Número de Tarjeta</label>
+                    <input type="number" class="form-control" id="card" name="card" formControlName="card" min="11111"
+                        max="9999999999999999" required>
+                </div>
+                <div class="col-12">
+                    <label for="date" class="form-label">Año de Expiración</label>
+                    <input type="number" class="form-control" placeholder="YYYY" id="date" name="date" step="1"
+                        min="2023" max="2999" formControlName="dateY" required>
+                </div>
+                <div class="col-12">
+                    <label for="date" class="form-label">Mes de Expiración</label>
+                    <input type="number" class="form-control" placeholder="MM" id="date" name="date" step="1" min="1"
+                        max="12" formControlName="dateM" required>
+                </div>
+                <div class="col-12">
+                    <label for="cvv" class="form-label">CVV</label>
+                    <input type="number" placeholder="Código de Seguridad" pattern="[0-9]{3}" class="form-control" min="111" max="999"
+                        id="cvv" name="cvv" formControlName="cvv" required>
+                </div>
+                <div class="col-12 text-center">
+                    <button type="submit" class="btn btn-primary">Agregar Fondos</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

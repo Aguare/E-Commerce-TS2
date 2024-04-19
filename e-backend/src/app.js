@@ -9,16 +9,39 @@ import connection from './dbConnect';
 const app = express();
 
 const storage = multer.diskStorage({
-  destination: path.join(__dirname, 'public/img/products'),
+  destination: (req, file, cb) => {
+    const destinationDir = req.body.isProfileImg
+      ? 'public/img/profiles'
+      : 'public/img/products';
+    cb(null, path.join(__dirname, destinationDir));
+  },
   filename: (req, file, cb) => {
-    const { userId } = req.body;
     const newNameFile = uuid() + path.extname(file.originalname).toLowerCase();
-    const query = `INSERT INTO image (path, FK_User) VALUES (?, ?)`;
-    connection.query(query, [newNameFile, userId], (error, results, fields) => {
-      if (error) {
-        return cb(error, null);
-      }
-    });
+    const { userId } = req.body;
+    const isProfileImg = req.body.isProfileImg || false;
+    if (isProfileImg) {
+      const query = `UPDATE user SET profile = ? WHERE id = ?`;
+      connection.query(
+        query,
+        [newNameFile, userId],
+        (error, results, fields) => {
+          if (error) {
+            return cb(error, null);
+          }
+        }
+      );
+    } else {
+      const query = `INSERT INTO image (path, FK_User) VALUES (?, ?)`;
+      connection.query(
+        query,
+        [newNameFile, userId],
+        (error, results, fields) => {
+          if (error) {
+            return cb(error, null);
+          }
+        }
+      );
+    }
     cb(null, newNameFile);
   }
 });

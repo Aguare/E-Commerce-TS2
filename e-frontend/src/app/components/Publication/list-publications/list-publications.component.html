@@ -1,0 +1,52 @@
+<div class="container my-5">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="text-center">Mis Publicaciones</h1>
+        </div>
+    </div>
+    <table class="table table-hover table-bordered text-center align-middle">
+        <thead class="table-dark">
+            <tr>
+                <th scope="col" class="col-1">ID</th>
+                <th scope="col" class="col-4">Título</th>
+                <th scope="col" class="col-1">Tipo</th>
+                <th scope="col" class="col-1">Aprobado</th>
+                <th scope="col" class="col-1">Estado</th>
+                <th scope="col" class="col-1">Creado</th>
+                <th scope="col" class="col-3">Opciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let dt of listPublications">
+                <th scope="row">{{dt.id}}</th>
+                <td>{{dt.title}}</td>
+                <td class="col-1">
+                    {{dt.isVolunteering ? 'Voluntariado' : 'Bien/Servicio'}}
+                </td>
+                <td class="col-1">
+                    <span
+                        [ngClass]="{'badge text-bg-success': dt.isApproved == 'approved', 'badge text-bg-danger': dt.isApproved == 'rejected', 'badge text-bg-warning': dt.isApproved != 'approved' && dt.isApproved != 'rejected'}">
+                        {{dt.isApproved == 'approved' ? 'Aprobado' : (dt.isApproved == 'rejected' ? 'Rechazado' :
+                        'Pendiente')}}
+                    </span>
+                </td>
+                <td class="col-1">
+                    <span [ngClass]="{'badge text-bg-success': dt.isSold, 'badge text-bg-danger': !dt.isSold}">
+                        {{dt.isSold ? (dt.isVolunteering ? 'Vendido' : 'Lleno') : 'Disponible'}}</span>
+                </td>
+                <td class="col-2">{{ dt.created_at | date: 'dd/MM/yyyy HH:mm' }}</td>
+                <td class="col-2">
+                    <a href="/publication/view/{{dt.id}}" class="btn btn-primary mx-1">
+                        <i class="fa-solid fa-eye"></i>
+                    </a>
+                    <a href="/publication/edit/{{dt.id}}" class="btn btn-warning mx-1">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </a>
+                    <button (click)="deletePublication(dt.id)" class="btn btn-danger mx-1"><i
+                            class="fa-solid fa-trash"></i>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

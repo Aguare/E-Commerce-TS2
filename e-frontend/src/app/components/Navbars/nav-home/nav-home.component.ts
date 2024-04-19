@@ -18,8 +18,10 @@ export class NavHomeComponent {
     private _router: Router
   ) {
     const user = this._localStorageService.getUser();
-    if (user.username) {
+    if (user.username && user.role === 'COMMON') {
       this._router.navigate(['/market']);
+    } else if (user.username && user.role === 'ADMIN') {
+      this._router.navigate(['/admin']);
     }
   }
 }

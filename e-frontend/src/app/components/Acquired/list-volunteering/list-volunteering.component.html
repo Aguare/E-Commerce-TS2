@@ -1,0 +1,49 @@
+<div class="container my-5">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="text-center">Mis Voluntariados</h1>
+        </div>
+    </div>
+    <table class="table table-hover table-bordered text-center align-middle">
+        <thead class="table-dark">
+            <tr>
+                <th scope="col" class="col-1">ID</th>
+                <th scope="col" class="col-1">Estado</th>
+                <th scope="col" class="col-1">Pagada Con</th>
+                <th scope="col" class="col-1">Monto</th>
+                <th scope="col" class="col-1">Registro</th>
+                <th scope="col" class="col-3">Opciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let dt of listVolunteering">
+                <th scope="row">{{dt.id}}</th>
+                <td class="col-1">
+                    <span
+                        [ngClass]="{'badge text-bg-success': dt.status == 'soon', 'badge text-bg-danger': dt.status == 'canceled', 'badge text-bg-warning': dt.status != 'finalized'}">
+                        {{dt.status == 'soon' ? 'Próximamente' : (dt.status == 'canceled' ? 'Cancelado' : dt.status ==
+                        'finalized' ? 'Finalizado' : 'Pendiente')}}
+                    </span>
+                </td>
+                <td class="col-1">
+                    <button type="button" class="btn btn-warning mx-1">
+                        <i class="fa-solid fa-coins"></i>
+                    </button>
+                </td>
+                <td class="col-2">{{ dt.amount | currency: ' ' }}</td>
+                <td class="col-2">{{ dt.created_at | date: 'dd/MM/yyyy HH:mm' }}</td>
+                <td class="col-2">
+                    <a href="/publication/view/{{dt.id}}" class="btn btn-success mx-1">
+                        <i class="fa-solid fa-eye"></i>
+                    </a>
+                    <a href="/market/chat" class="btn btn-primary mx-1">
+                        <i class="fa-brands fa-rocketchat"></i>
+                    </a>
+                    <button [disabled]="dt.status != 'soon'" (click)="deleteBuy(dt.id)"
+                        class="btn btn-danger mx-1"><i class="fa-solid fa-trash"></i>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

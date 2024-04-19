@@ -1,0 +1,18 @@
+@import 'stream-chat-angular/src/assets/styles/v2/scss/index.scss';
+
+#root {
+  display: flex;
+  height: 70% !important;
+
+  stream-channel-list {
+    width: 30%;
+  }
+
+  stream-channel {
+    width: 100%;
+  }
+
+  stream-thread {
+    width: 45%;
+  }
+}

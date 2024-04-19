@@ -1,0 +1,31 @@
+<div class="container text-center my-2">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="container-fluid" style="max-width: 400px;">
+                    <img [src]="user.profile" class="card-img-top" alt="Foto de perfil" width="400px">
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ user.name }} {{ user.lastName }}</h5>
+                    <p class="card-text">DPI: {{ user.dpi }}</p>
+                    <p class="card-text">Usuario: {{ user.username }}</p>
+                    <p class="card-text">Rol: {{ user.role }}</p>
+                    <p class="card-text">Monedas: {{ user.coins }}</p>
+                    <p class="card-text">Dinero: {{ user.money }}</p>
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-md-6">
+                                <div class="input-group mb-3">
+                                    <input type="file" class="form-control mx-2" id="images"
+                                        (change)="onImagesSelect($event)">
+                                    <button (click)="changeImage()" class="btn btn-primary">Cambiar Foto de Perfil</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

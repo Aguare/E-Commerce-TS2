@@ -1,0 +1,75 @@
+<div class="container my-5">
+    <div class="row">
+        <div class="col-12">
+            @if (exists){
+            <h1 class="text-center">{{publication.title}}</h1>
+            } @else {
+            <h1 class="text-center">No se encontró la publicación</h1>
+            }
+
+        </div>
+        <div *ngIf="exists" class="col-6">
+            <app-carousel-images-publi [listImages]="images"></app-carousel-images-publi>
+        </div>
+        <div class="col-6">
+            <div class="text-center">
+                @if (!publication.isVolunteering) {
+                <h3>Llevatelo al mejor precio</h3>
+                } @else {
+                <h3>Apoya y Gana Monedas de la plataforma</h3>
+                }
+            </div>
+            <button type="button" class="btn btn-warning mx-1">
+                <i class="fa-solid fa-coins mx-1"></i>
+                <span class="badge text-bg-light">
+                    {{ publication.priceCP }}
+                </span>
+            </button>
+            <button type="button" class="btn btn-success mx-1">
+                <i class="fa-solid fa-dollar-sign mx-1"></i>
+                <span class="badge text-bg-light">
+                    {{ publication.priceM }}
+                </span>
+            </button>
+            <button type="button" class="btn btn-dark mx-1">
+                <i class="fa-solid fa-clock mx-1"></i>
+                <span class="badge text-bg-light">
+                    {{ publication.created_at | date: 'dd/MM/yyyy HH:mm' }}
+                </span>
+            </button>
+            @if (!publication.isVolunteering){
+            <button (click)="registerBuy()" *ngIf="publication.FK_User != user.id && user.role == 'COMMON' && !publication.isSold" type="button"
+                class="btn btn-primary mx-1">
+                <i class="fa-solid fa-cart-shopping"></i> Comprar
+            </button>
+            <button *ngIf="publication.isSold" type="button" class="btn btn-success mx-1">
+                <i class="fa-solid fa-check-double"></i> Vendido
+            </button>
+            } @else {
+            <div class="card my-1">
+                <div class="card-body">
+                    Personas que van a apoyar: {{ registered }}
+                    Espacios Diponibles: {{ quantity - registered }}
+                    <button (click)="verifyVolunteering()" *ngIf="publication.FK_User != user.id && user.role == 'COMMON' && !isRegistered" type="button"
+                        class="btn btn-outline-primary">
+                        <i class="fa-solid fa-person"></i> Registrar
+                    </button>
+                </div>
+            </div>
+            }
+            <div [innerHTML]="publication.description"></div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-12">
+            @if (publication.isVolunteering) {
+            <span class="badge text-bg-success mx-1">Voluntariado</span>
+            }
+            @else if (exists) {
+            <span class="badge text-bg-warning mx-1">Bien/Servicio</span>
+            }
+            <span *ngFor="let t of tags" class="badge text-bg-primary mx-1">{{t.tag}}</span>
+        </div>
+    </div>
+</div>

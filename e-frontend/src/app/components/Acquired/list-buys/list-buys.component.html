@@ -1,0 +1,52 @@
+<div class="container my-5">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="text-center">Mis Compras</h1>
+        </div>
+    </div>
+    <table class="table table-hover table-bordered text-center align-middle">
+        <thead class="table-dark">
+            <tr>
+                <th scope="col" class="col-1">ID</th>
+                <th scope="col" class="col-1">Estado</th>
+                <th scope="col" class="col-1">Pagada Con</th>
+                <th scope="col" class="col-1">Monto</th>
+                <th scope="col" class="col-1">Realizada</th>
+                <th scope="col" class="col-3">Opciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let dt of listBuys">
+                <th scope="row">{{dt.id}}</th>
+                <td class="col-1">
+                    <span
+                        [ngClass]="{'badge text-bg-success': dt.status == 'delivered', 'badge text-bg-danger': dt.status == 'canceled', 'badge text-bg-warning': dt.status != 'pending',  'badge text-bg-primary': dt.status != 'onroad'}">
+                        {{dt.status == 'delivered' ? 'Entregado' : (dt.status == 'canceled' ? 'Cancelado' : dt.status ==
+                        'pending' ? 'Pendiente' : dt.status == 'onroad' ? 'En Camino' : 'En Proceso')}}
+                    </span>
+                </td>
+                <td class="col-1">
+                    <button *ngIf="!dt.withMoney" type="button" class="btn btn-warning mx-1">
+                        <i class="fa-solid fa-coins"></i>
+                    </button>
+                    <button *ngIf="dt.withMoney" type="button" class="btn btn-success mx-1">
+                        <i class="fa-solid fa-dollar-sign"></i>
+                    </button>
+                </td>
+                <td class="col-2">{{ dt.amount | currency: 'Q' }}</td>
+                <td class="col-2">{{ dt.created_at | date: 'dd/MM/yyyy HH:mm' }}</td>
+                <td class="col-2">
+                    <a href="/publication/view/{{dt.id}}" class="btn btn-success mx-1">
+                        <i class="fa-solid fa-eye"></i>
+                    </a>
+                    <button (click)="createChat(dt.FK_User)" class="btn btn-primary mx-1">
+                        <i class="fa-brands fa-rocketchat"></i>
+                    </button>
+                    <button [disabled]="dt.status != 'pending'" (click)="deleteBuy(dt.id)"
+                        class="btn btn-danger mx-1"><i class="fa-solid fa-trash"></i>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

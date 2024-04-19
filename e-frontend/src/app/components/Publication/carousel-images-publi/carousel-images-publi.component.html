@@ -1,0 +1,14 @@
+<div id="image-carousel" class="splide">
+    <div class="splide__track">
+        <ul class="splide__list">
+            <li class="splide__slide" *ngFor="let i of listImages">
+                <img [src]="'http://localhost:3000/img/products/'+ i.path" [title]="i.id"
+                    height="450px" class="d-block rounded w-100 lazyload" />
+            </li>
+        </ul>
+    </div>
+
+    <div class="splide__progress">
+        <div class="splide__progress__bar"></div>
+    </div>
+</div>

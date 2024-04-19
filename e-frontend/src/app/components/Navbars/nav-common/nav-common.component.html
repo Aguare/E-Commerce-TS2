@@ -10,10 +10,7 @@
         <div class="collapse navbar-collapse" id="navbarColor01">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" href="/market/publications">Productos</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Voluntariados</a>
+                    <a class="nav-link" href="/market/publications">Inicio</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
@@ -22,8 +19,7 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <li><a class="dropdown-item" href="/publication/create">Crear</a></li>
-                        <li><a class="dropdown-item" href="#">Mis Publicaciones</a></li>
-                        <li><a class="dropdown-item" href="#">Mis Voluntariados</a></li>
+                        <li><a class="dropdown-item" href="/publication/my-publications">Mis Publicaciones</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
@@ -32,24 +28,23 @@
                         <i class="fa-solid fa-shop"></i> Compras
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <li><a class="dropdown-item" href="#">Mis Compras</a></li>
-                        <li><a class="dropdown-item" href="#">Mis Publicaciones</a></li>
-                        <li><a class="dropdown-item" href="#">Mis Voluntariados</a></li>
+                        <li><a class="dropdown-item" href="/buys/my-buys">Mis Compras</a></li>
+                        <li><a class="dropdown-item" href="/buys/my-volunteering">Mis Voluntariados</a></li>
                     </ul>
                 </li>
             </ul>
 
             <div class="mx-0">
-                <button type="button" class="btn btn-warning position-relative mx-2">
+                <a href="/market/add-founds" type="button" class="btn btn-warning position-relative mx-4">
                     <i class="fa-solid fa-coins"></i>
                     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                        {{ this.user.coins || 0 }}
+                        {{ formatNumber(this.user.coins || 0) }}
                     </span>
-                </button>
-                <button type="button" class="btn btn-success position-relative mx-2">
+                </a>
+                <button type="button" class="btn btn-success position-relative mx-4">
                     <i class="fa-solid fa-dollar-sign"></i>
                     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                        {{ this.user.money || 0 }}
+                        {{ formatNumber(this.user.money) || 0 }}
                     </span>
                 </button>
             </div>
@@ -61,8 +56,8 @@
                     {{ this.username || 'Mi Cuenta' }}
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li><a class="dropdown-item" href="#">Perfil</a></li>
-                    <li><a class="dropdown-item" href="#">Mensajes</a></li>
+                    <li><a class="dropdown-item" href="/market/perfil">Perfil</a></li>
+                    <li><a class="dropdown-item" href="/market/chat">Mensajes</a></li>
                     <li><a class="dropdown-item" href="#">Configuración</a></li>
                     <li><a class="dropdown-item" (click)="logout()">Salir</a></li>
                 </ul>

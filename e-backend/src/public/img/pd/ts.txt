@@ -1,0 +1,29 @@
+@echo off
+setlocal enabledelayedexpansion
+
+rem Define la carpeta de trabajo
+set "folder=C:\ruta\al\directorio"
+
+rem Variables
+set count=1
+
+rem Cambia al directorio especificado
+cd "%folder%"
+
+rem Recorre todos los archivos en el directorio
+for %%f in (*) do (
+    rem Verifica si el archivo actual es el script de lote (.bat) y lo omite
+    if /i "%%~xf"==".bat" (
+        echo Omitiendo archivo de script: %%f
+    ) else (
+        rem Renombra el archivo actual con un número secuencial
+        ren "%%f" "!count!%%~xf"
+        rem Incrementa el contador
+        set /a count+=1
+    )
+)
+
+rem Mensaje de finalización
+echo Renombrado completado.
+
+endlocal

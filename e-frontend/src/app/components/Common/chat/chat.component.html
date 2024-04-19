@@ -1,0 +1,45 @@
+<section>
+    <div class="container py-5">
+
+        <div class="row">
+            <div class="col-md-6 col-lg-5 col-xl-4 mb-1">
+                <h5 class="mb-4">Chats</h5>
+                <div class="card">
+                    <div class="card-body">
+                        <ul class="list-unstyled mb-0" style="max-height: 550px; height: 550px; overflow-y: auto;">
+                            <div *ngFor="let c of listChats">
+                                <app-card-chat-user [chatUser]="c" [idUser]="user.id"
+                                    (selectedChat)="selectChat($event)" [idSelected]="idSelected"></app-card-chat-user>
+                            </div>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-7 col-xl-8 my-4">
+                <ul class="list-unstyled">
+                    <div class="container" id="list-messages"
+                        style="max-height: 550px; min-height:550px; overflow-y: auto;" scrollToBottom>
+                        <div *ngFor="let m of listMessages">
+                            <app-card-message [message]="m" [idUserSession]="user.id"></app-card-message>
+                        </div>
+                    </div>
+                    <li class="bg-white mb-3">
+                        <div data-mdb-input-init class="form-outline">
+                            <div class="NgxEditor__Wrapper" style="min-height: 150px; overflow-y: auto;"
+                                (keyup.enter)="sendMessage()">
+                                <ngx-editor-menu [editor]="editor"> </ngx-editor-menu>
+                                <ngx-editor [editor]="editor" [ngModelOptions]="{standalone: true}"
+                                    [(ngModel)]="newMessage" [disabled]="false"
+                                    [placeholder]="'Escribe una descripción'"></ngx-editor>
+                            </div>
+                        </div>
+                    </li>
+                    <button type="button" (click)="sendMessage()" data-mdb-button-init data-mdb-ripple-init
+                        class="btn btn-info btn-rounded float-end"><i
+                            class="fa-sharp fa-solid fa-paper-plane-top"></i>Enviar</button>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>

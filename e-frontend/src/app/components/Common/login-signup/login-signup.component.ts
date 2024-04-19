@@ -99,7 +99,12 @@ export class LoginSignupComponent {
           next: (res: any) => {
             this._localStorageService.saveUser(res.user);
             window.location.reload();
-            this._router.navigate(['/market']);
+            let user = this._localStorageService.getUser();
+            if (user.role === 'ADMIN') {
+              this._router.navigate(['/admin']);
+            } else {
+              this._router.navigate(['/market/publications']);
+            }
           },
           error: (err: any) => {
             Swal.fire({

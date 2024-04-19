@@ -114,7 +114,9 @@ export class CreatePublicationComponent {
       title: 'Creando publicación...',
       didOpen: () => {
         Swal.showLoading();
-      }
+      },
+      allowOutsideClick: false,
+      allowEscapeKey: false
     });
 
     this._generalService.createPublication(formData).subscribe(
